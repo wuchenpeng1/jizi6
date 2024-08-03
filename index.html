@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Search</title>
+    <style>
+      /* 添加样式以居中显示图片 */
+      #images {
+        display: flex; /* 使用 Flexbox */
+        justify-content: center; /* 水平方向居中 */
+        flex-wrap: wrap; /* 如果有多张图片，换行 */
+        margin-top: 20px; /* 上边距 */
+      }
+      #images img {
+        margin: 10px; /* 图片间距 */
+        width: 90px; /* 设置宽度 */
+        height: auto; /* 维护纵横比 */
+      }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center">
+      <input type="text" id="search" placeholder="集字" />
+      <button id="searchButton">搜索</button>
+    </div>
+    <div id="images"></div>
+
+    <script>
+      document
+        .getElementById("searchButton")
+        .addEventListener("click", function () {
+          const searchTerm = document
+            .getElementById("search")
+            .value.toLowerCase()
+            .trim();
+          const imagesDiv = document.getElementById("images");
+          imagesDiv.innerHTML = ""; // 清空之前的结果
+
+          if (!searchTerm) return; // 如果没有搜索词，则不执行任何操作
+
+          // 示例图像 URL
+          const images = {
+            天: "https://img.picgo.net/2024/08/03/_20240803124407c2cd5d2082a494f3.jpg",
+            地: "https://img.picgo.net/2024/08/03/_20240803124417102063a685e433ca.jpg",
+            玄: "https://img.picgo.net/2024/08/03/_202408031244272c1a3517a76e4376.jpg",
+            黄: "https://img.picgo.net/2024/08/03/_2024080312444849f58ecbedf7e2ed.jpg",
+          };
+
+          // 根据输入字符的顺序创建图像元素
+          for (let char of searchTerm) {
+            if (images[char]) {
+              // 检查字符是否在 images 对象中
+              const img = document.createElement("img");
+              img.src = images[char];
+              imagesDiv.appendChild(img);
+            }
+          }
+        });
+    </script>
+  </body>
+</html>
